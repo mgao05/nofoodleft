@@ -1,4 +1,4 @@
-package main.java.com.molly.config;
+package  com.molly.config;
 
 public class AppConfig {
 }
