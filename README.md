@@ -1,0 +1,1 @@
+to add version to pom, go to https://mvnrepository.com/artifact/org.springframework/spring-core/5.1.5.RELEASE
