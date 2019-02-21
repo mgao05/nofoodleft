@@ -9,7 +9,7 @@ import javax.sql.DataSource;
 
 //dependency process using configuration
 @Configuration
-public class DataSourceIntializer {
+public class DataSourceInitializer {
     public String databaseUrl = "jdbc:postgresql://localhost:5432/noFoodLeft";
     public String databaseUserName = "molly";
     public String databasePassword = "password";
