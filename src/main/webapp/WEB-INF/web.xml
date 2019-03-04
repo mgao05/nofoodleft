@@ -40,7 +40,7 @@
              and fully-qualified @Configuration classes -->
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>io.ascending.training.config.MvcConfig</param-value>
+            <param-value>com.molly.config.MvcConfig</param-value>
         </init-param>
     </servlet>
 
