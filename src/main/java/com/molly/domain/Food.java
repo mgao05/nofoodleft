@@ -13,13 +13,13 @@ public class Food {
     private Long Id;
     @Column(name = "food_type")
     private String foodType;
-    @Column(name = "image_id")
-    private Integer imageId;
+   // @Column(name = "image_id")
+    //private Integer imageId;
 
 
-    @JoinColumn(name = "area_id")
-    @ManyToOne
-    private Area area;
+//    @JoinColumn(name = "area_id")
+//    @ManyToOne
+//    private Area area;
 
     @JoinColumn(name = "building_id")
     @ManyToOne

@@ -11,23 +11,23 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Table(name="users")
 public class User {
     @Id
-    @GeneratedValue(strategy = SEQUENCE, generator = "users_id_seq")
-    @SequenceGenerator(name="users_id_seq", sequenceName = "users_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = SEQUENCE, generator = "user_id_seq")
+    @SequenceGenerator(name="user_id_seq", sequenceName = "user_id_seq", allocationSize = 1)
     private Long id;
 
-    @Column(name = "username")
+    @Column(name = "username",unique = true)
     private String username;
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
-    @Column(name = "email")
+    @Column(name = "email",unique = true)
     @NotNull
     private String email;
     @Column(name = "password")
     private String password;
-    @Column(name = "age")
-    private Integer age;
+//    @Column(name = "age")
+//    private Integer age;
 
 }
 

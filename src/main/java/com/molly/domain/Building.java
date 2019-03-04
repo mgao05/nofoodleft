@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 import static javax.persistence.GenerationType.SEQUENCE;
 @Entity
-@Table(name="building")
+@Table(name="buildings")
 public class Building {
     @Id
     @GeneratedValue(strategy = SEQUENCE,generator = "building_id_seq")
@@ -12,16 +12,16 @@ public class Building {
     private Long Id;
     @Column(name = "building_name")
     private String buildingName;
-    @Column(name = "longitude")
-    private String longitude;
-    @Column(name = "latitude")
-    private String latitude;
+//    @Column(name = "longitude")
+//    private Integer longitude;
+//    @Column(name = "latitude")
+//    private Integer latitude;
 
-    @JoinColumn(name = "area_Id")
+    @JoinColumn(name = "area_id")
     @ManyToOne
     private Area area;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "area", cascade = CascadeType.ALL)
-    private List<Food> food;
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "area", cascade = CascadeType.ALL)
+//    private List<Food> food;
 }
 

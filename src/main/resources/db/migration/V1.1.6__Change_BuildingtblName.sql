@@ -1,1 +1,0 @@
-ALTER TABLE buildings RENAME TO building;

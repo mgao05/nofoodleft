@@ -14,7 +14,7 @@ import org.springframework.core.io.ClassPathResource;
 
 @Configuration
 @ComponentScan(basePackages = "com.molly",
-excludeFilters = @ComponentScan.Filter(type= FilterType.REGEX,pattern = "com.molly.api.*"))
+    excludeFilters = @ComponentScan.Filter(type= FilterType.REGEX,pattern = "com.molly.api.*"))
 public class AppConfig {
     @Autowired
     private Environment environment;
