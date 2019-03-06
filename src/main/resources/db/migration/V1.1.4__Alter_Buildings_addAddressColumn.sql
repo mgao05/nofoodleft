@@ -1,0 +1,1 @@
+ALTER table Buildings ADD column building_address varchar(255);

@@ -223,7 +223,7 @@
 
                 <configuration>
                     <driver>org.postgresql.Driver</driver>
-                    <url>jdbc:postgresql://localhost:5432/foodie_unit</url>
+                    <url>jdbc:postgresql://localhost:5432/foodie</url>
                     <user>molly</user>
                     <password>password</password>
                     <locations>
