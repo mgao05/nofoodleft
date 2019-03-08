@@ -2,20 +2,25 @@ package com.molly.config;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.jpa.HibernatePersistenceProvider;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
 
 
 //dependency process using configuration
 @Configuration
-@EnableTransactionManagement
+@EnableTransactionManagement //add transaction management to manage the process
 @EnableJpaRepositories(basePackages ="com.molly.repository")
 public class DataSourceInitializer {
     @Value("#{ databaseProperties['databaseUrl']}")
@@ -34,6 +39,14 @@ public class DataSourceInitializer {
     public DataSource getDataSource (){
         DataSource dataSource=createDataSource();
         return dataSource;
+    }
+
+    @Bean(name="transactionManager")
+    public PlatformTransactionManager transactionManager(@Qualifier("entityManagerFactory") EntityManagerFactory entityManagerFactory, @Autowired DataSource dataSource) {
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(entityManagerFactory);
+        transactionManager.setDataSource(dataSource);
+        return transactionManager;
     }
 
     private BasicDataSource createDataSource() { //if want to check class property, press command and click

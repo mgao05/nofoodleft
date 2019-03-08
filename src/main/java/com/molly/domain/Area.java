@@ -19,8 +19,7 @@ public class Area {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "area", cascade = CascadeType.ALL)
     private List<Building> building;
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "area", cascade = CascadeType.ALL)
-//    private List<Food> food;
+
 
     //get and set method for area
     //id

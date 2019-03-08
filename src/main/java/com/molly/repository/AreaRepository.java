@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface AreaRepository extends CrudRepository<Area, Long> {
     List<Area> findAll();
+    Area findByAreaName(String areaName);
 }

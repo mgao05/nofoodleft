@@ -31,7 +31,7 @@ public class User {
 
     //create get and set method for each column, excludes id
     // id
-    public Long getID(){
+    public Long getId(){
         return id;
     }
 
