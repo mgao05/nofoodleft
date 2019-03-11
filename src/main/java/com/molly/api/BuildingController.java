@@ -30,7 +30,8 @@ public class BuildingController {
     }
 
     @RequestMapping(method = RequestMethod.GET, params = {"buildingName"})
-    public Building genarateBuilding(@RequestParam String buildingName){
+    public Building generateBuilding(@RequestParam("buildingName") String buildingName){
+        logger.debug(buildingName);
         return buildingService.findByBuildingName(buildingName);
     }
 

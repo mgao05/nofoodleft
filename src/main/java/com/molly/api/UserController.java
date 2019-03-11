@@ -32,14 +32,32 @@ public class UserController {
     public List<User> getUserList() {
         logger.debug("List users");
         return userRepository.findAll();
+    }
 
-        }
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public User findById(@PathVariable("id") Long id){
+        logger.debug("path variable:" +id);
+        return userService.findById(id);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, params = {"firstName"})
+    public List<User> findByFirstName (@RequestParam("firstName") String firstName){
+        logger.debug(firstName);
+        return userService.findByFirstName(firstName);
+    }
+
     @RequestMapping(method = RequestMethod.GET, params = {"lastName"})
-        public List<User> generateUser (@RequestParam("lastName") String lastName){
+        public List<User> findByLastName (@RequestParam("lastName") String lastName){
         logger.debug(lastName);
         return userService.findByLastName(lastName);
-
-
-
     }
+
+    @RequestMapping(method = RequestMethod.GET, params = {"email"})
+    public List<User> findByEmail (@RequestParam("email") String email){
+        logger.debug(email);
+        return userService.findByFirstName(email);
+    }
+
+
+
 }

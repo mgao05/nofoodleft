@@ -6,12 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class FoodService {
     @Autowired
     private FoodRepository foodRepository;
 
+    @Transactional
+    public Food findById(Long id){
+        return foodRepository.findById(id).get();
+    }
 
     @Transactional
     public Food save(Food food) {
@@ -20,7 +25,7 @@ public class FoodService {
 
     @Transactional
     public void delete(Food food){
-         foodRepository.delete(food);
+        foodRepository.delete(food);
     }
 
     @Transactional
@@ -28,4 +33,8 @@ public class FoodService {
        return foodRepository.findByFoodType(foodType);
     }
 
+    @Transactional
+    public List<Food> findByBuilding_Id(Long id){
+        return foodRepository.findByBuilding_Id(id);
+    }
 }

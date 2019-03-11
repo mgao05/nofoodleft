@@ -1,5 +1,6 @@
 package com.molly.api;
 
+import com.molly.domain.Building;
 import com.molly.domain.Food;
 import com.molly.repository.FoodRepository;
 import com.molly.service.FoodService;
@@ -33,8 +34,15 @@ public class FoodController {
     }
 
     @RequestMapping(method = RequestMethod.GET, params = {"foodType"})
-    public Food generateFood(@RequestParam String foodType){
+    public Food findByFoodType(@RequestParam("foodType") String foodType){
+        logger.debug(foodType);
         return foodService.findByFoodType(foodType);
     }
 
+
+    @RequestMapping(method = RequestMethod.GET, params = {"building_Id"})
+    public List<Food> findByBuilding_Id(@RequestParam("building_Id") Long id){
+        logger.debug("yy"+id);
+        return foodService.findByBuilding_Id((id));
+    }
 }

@@ -7,4 +7,6 @@ import java.util.List;
 public interface BuildingRepository extends CrudRepository<Building, Long> {
     List<Building> findAll();
     Building findByBuildingName(String buildingName);
+    Building findByArea_Id(Long id);
+
 }

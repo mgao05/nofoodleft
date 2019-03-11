@@ -13,8 +13,19 @@ public class BuildingService {
     private BuildingRepository buildingRepository;
 
     @Transactional
-    public Building findByBuildingName(String buildingName){
-        return buildingRepository.findByBuildingName(buildingName);}
+    public Building findById(Long id){
+        return buildingRepository.findById(id).get();
+    }
+
+    @Transactional
+    public Building findByBuildingName(String buildingName) {
+        return buildingRepository.findByBuildingName(buildingName);
+    }
+
+    @Transactional
+    public Building findByArea_Id(long id) {
+        return buildingRepository.findByArea_Id(id);
+    }
 
 //    @Transactional
 //    public Building createBuilding(Building newBuilding){return buildingRepository.save(newBuilding);}

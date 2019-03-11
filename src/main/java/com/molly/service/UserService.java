@@ -14,6 +14,10 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Transactional
+    public User findById(Long id){
+        return userRepository.findById(id).get();
+    }
 
     @Transactional
     public User save(User user){
@@ -25,10 +29,6 @@ public class UserService {
         return userRepository.findByUsername(username);
     }
 
-    @Transactional
-    public User findById(Long id){
-        return userRepository.findById(id).get();
-    }
 
     @Transactional
     public List<User> findByFirstName(String firstName){
@@ -41,7 +41,7 @@ public class UserService {
     }
 
     @Transactional
-    public User findByUserEmail(String userEmail){
+    public User findByEmail(String userEmail){
         return userRepository.findByEmail(userEmail);
     }
 

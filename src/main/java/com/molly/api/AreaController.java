@@ -30,6 +30,7 @@ public class AreaController {
     }
 
     @RequestMapping(method = RequestMethod.GET,params = {"areaName"})
-    public Area generateArea(@RequestParam String areaName){
+    public Area generateArea(@RequestParam("areaName") String areaName){
+        logger.debug(areaName);
         return areaService.findByAreaName(areaName);}
 }

@@ -8,6 +8,9 @@ import java.util.List;
 public interface FoodRepository extends CrudRepository<Food, Long> {
     List<Food> findAll();
     Food findByFoodType(String foodType);
-//    Food createFood(String newfood);
-//    void deleteFood(String foodName);
+    void delete(Food food);
+    Food save(Food food);
+    List<Food> findByBuilding_Id(Long id);
+
 }
+//todo ask repository syntax should be same as sql requirement

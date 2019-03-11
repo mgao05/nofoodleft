@@ -14,6 +14,11 @@ public class AreaService {
     private AreaRepository areaRepository;
 
     @Transactional
+    public Area findById(Long id){
+        return areaRepository.findById(id).get();
+    }
+
+    @Transactional
     public Area findByAreaName(String areaName){
         return areaRepository.findByAreaName(areaName);}
 //    @Transactional
