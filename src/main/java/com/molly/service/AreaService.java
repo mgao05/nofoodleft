@@ -19,8 +19,16 @@ public class AreaService {
     }
 
     @Transactional
+    public Area save(Area area){
+        return areaRepository.save(area);
+    }
+
+
+    @Transactional
     public Area findByAreaName(String areaName){
         return areaRepository.findByAreaName(areaName);}
+
+
 //    @Transactional
 //    public Area createArea(Area newArea){return areaRepository.save(newArea);}
 }

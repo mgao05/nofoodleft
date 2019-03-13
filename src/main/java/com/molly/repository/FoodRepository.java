@@ -10,7 +10,7 @@ public interface FoodRepository extends CrudRepository<Food, Long> {
     Food findByFoodType(String foodType);
     void delete(Food food);
     Food save(Food food);
-    List<Food> findByBuildingId(Long id);
+    List<Food> findByBuilding_Id(Long id);
 
 }
 //todo ask repository syntax should be same as sql requirement

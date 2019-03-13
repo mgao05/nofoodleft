@@ -12,10 +12,6 @@ public class Building {
     private Long id;
     @Column(name = "building_name")
     private String buildingName;
-//    @Column(name = "longitude")
-//    private Integer longitude;
-//    @Column(name = "latitude")
-//    private Integer latitude;
     @Column(name = "building_address")
     private String buildingAddress;
 
@@ -43,6 +39,10 @@ public class Building {
     //area
     public Area getArea(){
         return area;
+    }
+
+    public void setArea(Area a){
+        this.area = a;
     }
 
     //address

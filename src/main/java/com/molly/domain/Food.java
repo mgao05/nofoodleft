@@ -1,5 +1,7 @@
 package com.molly.domain;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
 
 import static javax.persistence.GenerationType.SEQUENCE;
@@ -13,13 +15,6 @@ public class Food {
     private Long id;
     @Column(name = "food_type")
     private String foodType;
-   // @Column(name = "image_id")
-    //private Integer imageId;
-
-
-//    @JoinColumn(name = "area_id")
-//    @ManyToOne
-//    private Area area;
 
     @JoinColumn(name = "building_id")
     @ManyToOne
@@ -43,6 +38,8 @@ public class Food {
     public Building getBuilding(){
         return building;
     }
-
+    public void setBuilding(Building building){
+        this.building=building;
+    }
 
 }

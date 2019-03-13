@@ -18,6 +18,11 @@ public class BuildingService {
     }
 
     @Transactional
+    public Building save(Building building){
+        return buildingRepository.save(building);
+    }
+
+    @Transactional
     public Building findByBuildingName(String buildingName) {
         return buildingRepository.findByBuildingName(buildingName);
     }

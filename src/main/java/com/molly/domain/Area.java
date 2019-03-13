@@ -14,11 +14,8 @@ public class Area {
     private Long id;
     @Column(name = "area_name")
     private String areaName;
-//    @Column(name = "area_zipcode")
-//    private Integer areaZipcode;
-
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "area", cascade = CascadeType.ALL)
-    private List<Building> building;
+    private List<Building> buildings;
 
 
     //get and set method for area
