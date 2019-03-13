@@ -15,9 +15,22 @@ import static junit.framework.TestCase.assertTrue;
 @ActiveProfiles("unit")
 public class UserServiceTest {
     @Test
-    public void findByEmailTest(){
+    public void findByIdTest(){
         assertTrue(false);
-
     }
 
+    @Test
+    public void findByFirstNameTest(){
+        assertTrue(false);
+    }
+
+    @Test
+    public void findByLastNameTest(){
+        assertTrue(false);
+    }
+
+    @Test
+    public void findByEmailTest(){
+        assertTrue(false);
+    }
 }

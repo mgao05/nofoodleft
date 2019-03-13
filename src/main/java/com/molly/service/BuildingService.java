@@ -23,8 +23,8 @@ public class BuildingService {
     }
 
     @Transactional
-    public Building findByArea_Id(long id) {
-        return buildingRepository.findByArea_Id(id);
+    public Building findByAreaId(long id) {
+        return buildingRepository.findByAreaId(id);
     }
 
 //    @Transactional

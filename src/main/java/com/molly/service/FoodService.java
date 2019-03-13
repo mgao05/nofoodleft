@@ -34,7 +34,7 @@ public class FoodService {
     }
 
     @Transactional
-    public List<Food> findByBuilding_Id(Long id){
-        return foodRepository.findByBuilding_Id(id);
+    public List<Food> findByBuildingId(Long id){
+        return foodRepository.findByBuildingId(id);
     }
 }

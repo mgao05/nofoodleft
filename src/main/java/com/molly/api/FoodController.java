@@ -41,8 +41,8 @@ public class FoodController {
 
 
     @RequestMapping(method = RequestMethod.GET, params = {"building_Id"})
-    public List<Food> findByBuilding_Id(@RequestParam("building_Id") Long id){
+    public List<Food> findByBuildingId(@RequestParam("building_Id") Long id){
         logger.debug("yy"+id);
-        return foodService.findByBuilding_Id((id));
+        return foodService.findByBuildingId((id));
     }
 }
