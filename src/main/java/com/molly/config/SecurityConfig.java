@@ -1,6 +1,7 @@
 package com.molly.config;
 
 import com.molly.extend.security.RestAuthenticationEntryPoint;
+import com.molly.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
