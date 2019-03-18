@@ -17,7 +17,7 @@ public class Food {
     private String foodType;
 
     @JoinColumn(name = "building_id")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Building building;
 
     //create get and set method for each column, excludes id

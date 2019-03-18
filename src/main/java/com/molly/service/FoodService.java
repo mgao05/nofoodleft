@@ -4,8 +4,8 @@ import com.molly.domain.Food;
 import com.molly.repository.FoodRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -28,8 +28,8 @@ public class FoodService {
         foodRepository.delete(food);
     }
 
-    @Transactional
-    public Food findByFoodType(String foodType){
+    @Transactional(readOnly=true)
+    public List<Food> findByFoodType(String foodType){
        return foodRepository.findByFoodType(foodType);
     }
 

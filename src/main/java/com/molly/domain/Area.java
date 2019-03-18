@@ -32,5 +32,12 @@ public class Area {
         this.areaName = areaName;
     }
 
+    public List<Building> getBuildings() {
+        return buildings;
+    }
+
+    public void setBuildings(List<Building> buildings) {
+        this.buildings = buildings;
+    }
 }
 

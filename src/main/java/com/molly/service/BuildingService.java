@@ -4,8 +4,9 @@ import com.molly.domain.Building;
 import com.molly.repository.BuildingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class BuildingService {
@@ -28,8 +29,8 @@ public class BuildingService {
     }
 
     @Transactional
-    public Building findByAreaId(long id) {
-        return buildingRepository.findByAreaId(id);
+    public List<Building> findByAreaId(Long id) {
+        return buildingRepository.findByArea_Id(id);
     }
 
 //    @Transactional

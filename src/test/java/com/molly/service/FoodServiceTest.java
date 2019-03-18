@@ -1,5 +1,4 @@
 package com.molly.service;
-
 import com.molly.config.AppConfig;
 import com.molly.domain.Area;
 import com.molly.domain.Building;
@@ -12,11 +11,9 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -39,34 +36,55 @@ public class FoodServiceTest {
     public void setup(){
         newFood = new Food();
         newFood.setFoodType("Vietnam");
-        newFood.setBuilding(new Building());
+//        newFood.setBuilding(new Building());
+//        newFood.getId();
         newBuilding = new Building();
         newBuilding.setBuildingName("trumptower");
         newBuilding.setBuildingAddress("Arlington,VA");
+
     }
 
     @Test
     @Transactional
     public void findByIdTest(){
+        Area a = new Area();
+        a.setAreaName("ryo's house");
+        areaService.save(a);
+        buildingService.save(newBuilding);
+        newBuilding.setArea(a);
+        buildingService.save(newBuilding);
+        newFood.setBuilding(newBuilding);
         foodService.save(newFood);
         Food testFood = foodService.findById(newFood.getId());
         assertNotNull(testFood);
         assertEquals(newFood.getId(),testFood.getId());
     }
 
-    @Test
-    public void saveTest(){
-        assertTrue(false);
-    }
+//    @Test
+//    @Transactional
+//    public void saveTest(){
+//        assertTrue(false);
+//    }
+//
+//    @Test
+//    @Transactional
+//    public void deleteTest(){
+//        assertTrue(false);
+//    }
 
     @Test
-    public void deleteTest(){
-        assertTrue(false);
-    }
-
-    @Test
+    @Transactional
     public void findByFoodTypeTest(){
-        assertTrue(false);
+        Area testArea = new Area();
+        testArea.setAreaName("ryo's house");
+        areaService.save(testArea);
+        newBuilding.setArea(testArea);
+        newBuilding = buildingService.save(newBuilding);
+        newFood.setBuilding(newBuilding);
+        foodService.save(newFood);
+        List <Food> testFood = foodService.findByFoodType(newFood.getFoodType());
+        Food firstFood = testFood.get(0);
+        assertEquals(newFood.getFoodType(),firstFood.getFoodType());
     }
 
     @Test

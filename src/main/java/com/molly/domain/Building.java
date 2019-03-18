@@ -15,12 +15,12 @@ public class Building {
     @Column(name = "building_address")
     private String buildingAddress;
 
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "area_id")
-    @ManyToOne
     private Area area;
 
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "area", cascade = CascadeType.ALL)
-//    private List<Food> food;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "building", cascade = CascadeType.ALL)
+    private List<Food> food;
 
     //get and set methods for class building
     //id
@@ -36,13 +36,12 @@ public class Building {
         this.buildingName = building;
     }
 
-    //area
-    public Area getArea(){
+    public Area getArea() {
         return area;
     }
 
-    public void setArea(Area a){
-        this.area = a;
+    public void setArea(Area area) {
+        this.area = area;
     }
 
     //address
@@ -54,5 +53,12 @@ public class Building {
         this.buildingAddress = address;
     }
 
+    public List<Food> getFood() {
+        return food;
+    }
+
+    public void setFood(List<Food> food) {
+        this.food = food;
+    }
 }
 

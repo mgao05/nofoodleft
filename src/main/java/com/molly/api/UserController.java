@@ -25,7 +25,7 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.POST)
     public User generateUser(@RequestBody User user) {
-        return userService.save(user);
+        return userService.createUser(user);
     }
 
     @RequestMapping(method = RequestMethod.GET)

@@ -1,0 +1,1 @@
+ALTER table food drop column area_id;

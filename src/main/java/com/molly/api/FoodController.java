@@ -34,7 +34,7 @@ public class FoodController {
     }
 
     @RequestMapping(method = RequestMethod.GET, params = {"foodType"})
-    public Food findByFoodType(@RequestParam("foodType") String foodType){
+    public List<Food> findByFoodType(@RequestParam("foodType") String foodType){
         logger.debug(foodType);
         return foodService.findByFoodType(foodType);
     }
