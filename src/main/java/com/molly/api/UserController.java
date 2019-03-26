@@ -1,14 +1,19 @@
 package com.molly.api;
-
 import com.molly.domain.User;
 import com.molly.repository.UserRepository;
 import com.molly.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.BeanIds;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @Controller
@@ -22,6 +27,10 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    @Qualifier(BeanIds.AUTHENTICATION_MANAGER)
+    private AuthenticationManager authenticationManager;
 
     @RequestMapping(method = RequestMethod.POST)
     public User generateUser(@RequestBody User user) {
@@ -58,6 +67,22 @@ public class UserController {
         return userService.findByFirstName(email);
     }
 
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @ResponseBody
+    public void login(@RequestParam("username") String username, @RequestParam("password") String password){
+        logger.info("username" + username + "password" + password);
+        try{
+            Authentication notFullyAuthenticated = new UsernamePasswordAuthenticationToken(
+                    username,
+                    password
+            );
+            final Authentication authentication = authenticationManager.authenticate(notFullyAuthenticated);
+
+        }
+        catch (AuthenticationException ex){
+        logger.error("error message",ex);
+        }
+    }
 
 
 }

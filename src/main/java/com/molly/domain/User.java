@@ -96,7 +96,7 @@ public class User implements UserDetails {
         this.email = email;
     }
 
-    @Override
+    @Override //user detail method
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
     }
