@@ -36,6 +36,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (domainUser == null){
            //todo exception handle
         }
+        //todo find authorities and list authorites
         return domainUser;
     }
 

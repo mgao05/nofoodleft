@@ -27,6 +27,7 @@ public class UserService {
         String encodedPass = encoder.encode(newUser.getPassword());
         newUser.setPassword(encodedPass);
         save(newUser);
+        //todo registered user, create authorites, setuser, save authority
         return newUser;
     }
 
@@ -36,6 +37,7 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
+    //todo throw exception by checking username is null or empty
     public User findByUsername(String username){
         return userRepository.findByUsername(username);
     }
@@ -55,5 +57,9 @@ public class UserService {
     public User findByEmail(String userEmail){
         return userRepository.findByEmail(userEmail);
     }
+
+    //Authority block
+
+
 
 }

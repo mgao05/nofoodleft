@@ -1,6 +1,7 @@
 package com.molly.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -36,6 +37,11 @@ public class User implements UserDetails {
 
    // @Column(name="account_non_expired")
     //todo create column and return this, add column and migrate
+
+
+    @Transient    //database not adding
+    @JsonIgnore   //controller response ignore json
+    private Collection<?extends GrantedAuthority> authorities;
 
     //create get and set method for each column, excludes id
     // id

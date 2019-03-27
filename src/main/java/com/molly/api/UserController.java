@@ -1,17 +1,22 @@
 package com.molly.api;
 import com.molly.domain.User;
+import com.molly.extend.security.JwtTokenUtil;
 import com.molly.repository.UserRepository;
 import com.molly.service.UserService;
+import javassist.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -31,6 +36,9 @@ public class UserController {
     @Autowired
     @Qualifier(BeanIds.AUTHENTICATION_MANAGER)
     private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
 
     @RequestMapping(method = RequestMethod.POST)
     public User generateUser(@RequestBody User user) {
@@ -68,21 +76,43 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public void login(@RequestParam("username") String username, @RequestParam("password") String password){
+    public String login(@RequestParam("username") String username, @RequestParam("password") String password){
         logger.info("username" + username + "password" + password);
-        try{
+        try {
             Authentication notFullyAuthenticated = new UsernamePasswordAuthenticationToken(
                     username,
                     password
             );
             final Authentication authentication = authenticationManager.authenticate(notFullyAuthenticated);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        }
+//            try {
+                final UserDetails userDetails = userService.findByUsername(username);
+                final String token = jwtTokenUtil.generateToken(userDetails);
+                return token;
+//                return ResponseEntity.ok(new JwtAuthenticationResponse(token), HttpStatus.OK);
+//            }
+//            catch (Exc e){
+//                logger.error("System can't find user by email or username",e);
+//                return null;
+//            }
+           }
         catch (AuthenticationException ex){
         logger.error("error message",ex);
+        //return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("authentication failure, please check your username and password");
         }
+      return null;
     }
+
+    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+    public User getUser(@RequestBody User user){
+        logger.debug("test");
+        return userService.createUser(user);
+    }
+
+
 
 
 }
