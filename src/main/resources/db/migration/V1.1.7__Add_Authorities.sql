@@ -1,14 +1,17 @@
-CREATE SEQUENCE user_id_seq;
+CREATE SEQUENCE authority_id_seq;
 
-create table users (
-id bigint not null DEFAULT NEXTVAL('user_id_seq'),
- authority varchar(255),
- last_name varchar(255) not NULL,
- email varchar(255) not NULL UNIQUE,
- password varchar(255) not NULL,
- username varchar (255) not NULL UNIQUE,
- primary key (id)
+create table authorities (
+id bigint not null DEFAULT NEXTVAL('authority_id_seq'),
+authority varchar(255),
+ primary key (id),
+ user_id bigint NOT NULL,
+ CONSTRAINT fk_authorities_users
+ FOREIGN KEY (user_id)
+ REFERENCES users (id)
+ ON DELETE NO ACTION
+ ON UPDATE NO ACTION
 );
 
-ALTER SEQUENCE user_id_seq OWNED BY users.id;
+ALTER SEQUENCE authority_id_seq OWNED BY authorities.id;
+
 
