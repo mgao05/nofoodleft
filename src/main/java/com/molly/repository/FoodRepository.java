@@ -11,8 +11,6 @@ public interface FoodRepository extends CrudRepository<Food, Long> {
     List<Food> findAll();
     @Query("select f from Food f where f.foodType=?1")
     List<Food> findByFoodType(String foodType);
-    void delete(Food food);
-    Food save(Food food);
     List<Food> findByBuilding_Id(Long id);
 
 }

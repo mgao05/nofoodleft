@@ -256,6 +256,7 @@
             <id>dev</id>
             <build>
                 <plugins>
+                    <!--flyway database migration -->
                     <plugin>
                         <groupId>org.flywaydb</groupId>
                         <artifactId>flyway-maven-plugin</artifactId>
@@ -287,9 +288,9 @@
 
                         <configuration>
                             <driver>org.postgresql.Driver</driver>
-                            <url>jdbc:postgresql://localhost:5432/foodie_unit</url>
-                            <user>molly</user>
-                            <password>password</password>
+                            <url>jdbc:postgresql://${db_url}</url>
+                            <user>${db_username}</user>
+                            <password>${db_password}</password>
                             <locations>
                                 <location>db/migration</location>
                             </locations>

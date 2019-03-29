@@ -48,5 +48,4 @@ public class UserDetailsServiceImplTest {
     assertNotNull(testUser);
     assertEquals(newUser.getUsername(),testUser.getUsername());
     }
-
 }

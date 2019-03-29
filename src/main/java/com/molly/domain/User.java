@@ -32,11 +32,15 @@ public class User implements UserDetails {
     private String email;
     @Column(name = "password")
     private String password;
-//    @Column(name = "age")
-//    private Integer age;
 
-   // @Column(name="account_non_expired")
-    //todo create column and return this, add column and migrate
+    @Column(name = "account_expired")
+    private boolean accountExpired;
+    @Column(name = "account_locked")
+    private boolean accountLocked;
+    @Column(name = "credentials_expired")
+    private boolean credentialsExpired;
+    @Column(name = "enabled")
+    private boolean enabled;
 
 
     @Transient    //database not adding
@@ -56,22 +60,22 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return !accountExpired;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return !accountLocked;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;//accountNonExpired
+        return !credentialsExpired;//accountNonExpired
     }
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
 
     public void setUsername(String username){
@@ -102,11 +106,11 @@ public class User implements UserDetails {
         this.email = email;
     }
 
-    @Override //user detail method
+    @Override //todo user detail method
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return authorities;
     }
-
+    public void setAuthorities(Collection authorities){this.authorities = authorities;}
     //password
     public String getPassword(){
         return password;
@@ -114,6 +118,24 @@ public class User implements UserDetails {
     public void setPassword(String password){
         this.password = password;
     }
+
+
+    public void setAccountExpired(boolean accountExpired) {
+        this.accountExpired = accountExpired;
+    }
+
+    public void setAccountLocked(boolean accountLocked) {
+        this.accountLocked = accountLocked;
+    }
+
+    public void setCredentialsExpired(boolean credentialsExpired) {
+        this.credentialsExpired = credentialsExpired;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
 
 
 

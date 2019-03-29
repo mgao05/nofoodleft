@@ -1,5 +1,6 @@
 package com.molly.service;
 
+import com.molly.domain.Authority;
 import com.molly.domain.User;
 import com.molly.repository.UserRepository;
 import org.slf4j.Logger;
@@ -14,12 +15,17 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service("userDetailsServiceImpl1")
 public class UserDetailsServiceImpl implements UserDetailsService {
 
 
     @Autowired
     private  UserService userService;
+
+    @Autowired
+    private AuthorityService authorityService;
 
     private static final Logger logger = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
 
@@ -36,7 +42,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (domainUser == null){
            //todo exception handle
         }
-        //todo find authorities and list authorites
+        //todo find authorities and list authority
+        List<Authority> authorities = authorityService.findByUser(domainUser);
+        domainUser.setAuthorities(authorities);
         return domainUser;
     }
 

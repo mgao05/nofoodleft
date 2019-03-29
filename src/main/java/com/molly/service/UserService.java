@@ -26,7 +26,8 @@ public class UserService {
     public User createUser(User newUser){
         String encodedPass = encoder.encode(newUser.getPassword());
         newUser.setPassword(encodedPass);
-        save(newUser);
+        userRepository.save(newUser);
+
         //todo registered user, create authorites, setuser, save authority
         return newUser;
     }
@@ -58,7 +59,7 @@ public class UserService {
         return userRepository.findByEmail(userEmail);
     }
 
-    //Authority block
+    //todo Authority block
 
 
 
