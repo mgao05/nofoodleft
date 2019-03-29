@@ -2,6 +2,7 @@ package com.molly.service;
 import com.molly.config.AppConfig;
 import com.molly.domain.User;
 import com.molly.repository.UserRepository;
+import javassist.NotFoundException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -48,9 +49,10 @@ public class UserServiceTest {
 
     @Test
     @Transactional
-    public void findByFirstNameTest(){
+    public void findByFirstNameTest()throws NullPointerException, NotFoundException {
         userService.save(newUser);
         List<User> testUser = userService.findByFirstName(newUser.getFirstName());
+
         assertNotNull(testUser);
         User firstUser = testUser.get(0); //a list of testUser, so get the first one only which is class user
         assertEquals(newUser.getFirstName(),firstUser.getFirstName());
@@ -58,7 +60,7 @@ public class UserServiceTest {
 
     @Test
     @Transactional
-    public void findByLastNameTest(){
+    public void findByLastNameTest()throws NullPointerException, NotFoundException{
         userService.save(newUser);
         List<User> testUser = userService.findByLastName(newUser.getLastName());
         assertNotNull(testUser);
@@ -68,7 +70,7 @@ public class UserServiceTest {
 
     @Test
     @Transactional
-    public void findByEmailTest(){
+    public void findByEmailTest()throws NullPointerException, NotFoundException{
        userService.save(newUser);
        User testUser = userService.findByEmail(newUser.getEmail());
        assertNotNull(testUser);

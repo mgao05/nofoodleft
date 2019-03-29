@@ -106,7 +106,7 @@ public class User implements UserDetails {
         this.email = email;
     }
 
-    @Override //todo user detail method
+    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
     }

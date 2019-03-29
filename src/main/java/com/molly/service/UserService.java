@@ -1,9 +1,14 @@
 package com.molly.service;
 
+import com.molly.domain.Authority;
 import com.molly.domain.User;
+import com.molly.repository.AuthorityRepository;
 import com.molly.repository.UserRepository;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.support.NullValue;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +19,10 @@ import java.util.List;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private AuthorityRepository authorityRepository;
+    private AuthorityService authorityService;
 
     @Transactional(readOnly = true)
     public User findById(Long id){
@@ -28,7 +37,8 @@ public class UserService {
         newUser.setPassword(encodedPass);
         userRepository.save(newUser);
 
-        //todo registered user, create authorites, setuser, save authority
+        authorityService.addAuthority("REGISTERED_USER",newUser);
+
         return newUser;
     }
 
@@ -38,25 +48,52 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
-    //todo throw exception by checking username is null or empty
-    public User findByUsername(String username){
-        return userRepository.findByUsername(username);
+    public User findByUsername(String username) throws UsernameNotFoundException,NullPointerException{
+        if(username==null){
+            throw new NullPointerException("");}
+        User user = userRepository.findByUsername(username);
+        if(user==null){
+            throw new UsernameNotFoundException("");}
+        return user;
     }
 
 
+
+
     @Transactional(readOnly = true)
-    public List<User> findByFirstName(String firstName){
-        return userRepository.findByFirstName(firstName);
+    public List<User> findByFirstName(String firstName) throws NotFoundException, NullPointerException{
+        if(firstName==null){
+            throw new NullPointerException("");
+        }
+        List<User> users = userRepository.findByFirstName(firstName);
+        if(users==null){
+            throw new NotFoundException("");
+        }
+        return users;
     }
 
     @Transactional(readOnly = true)
-    public List<User> findByLastName(String lastName){
-        return userRepository.findByLastName(lastName);
+    public List<User> findByLastName(String lastName) throws NotFoundException, NullPointerException{
+        if(lastName==null){
+            throw new NullPointerException("");
+        }
+        List<User> users = userRepository.findByLastName(lastName);
+        if(users==null){
+            throw new NotFoundException("");
+        }
+        return users;
     }
 
     @Transactional(readOnly = true)
-    public User findByEmail(String userEmail){
-        return userRepository.findByEmail(userEmail);
+    public User findByEmail(String userEmail)throws NotFoundException, NullPointerException{
+        if(userEmail==null){
+            throw new NullPointerException("");
+        }
+        User user = userRepository.findByEmail(userEmail);
+        if(user == null){
+            throw new NotFoundException("");
+        }
+        return user;
     }
 
     //todo Authority block

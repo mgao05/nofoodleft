@@ -16,11 +16,19 @@ public class AuthorityService {
     private AuthorityRepository authorityRepository;
 
     @Transactional
-    public void addAuthority(String authority){
+    public Authority addAuthority(String authority,User user){
         Authority auth = new Authority();
         auth.setAuthority(authority);
+        auth.setUser(user);
         authorityRepository.save(auth);
+        return auth;
     }
+
+    @Transactional
+    public Authority save(Authority authority){
+        return authorityRepository.save(authority);
+    }
+
     //todo store createuser, input a user and output an authority method
     @Transactional
     public List<Authority> findByUser(User user) {

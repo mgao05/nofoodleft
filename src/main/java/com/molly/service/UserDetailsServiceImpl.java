@@ -34,15 +34,18 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         logger.debug(username+"is trying to log in from spring security");
         User domainUser = null;
+//        userService.findByUsername(username);
+//        1, null 2, user 3 execption
         try {
-            domainUser = userService.findByUsername(username);
-        }catch (Exception repositoryProblem){   //catch (NotFoundException|NullPointerException repositoryProblem)
+            domainUser =  userService.findByUsername(username);
+        }catch (Exception repositoryProblem){//catch (NotFoundException|NullPointerException repositoryProblem)
+           //try find user in another way
             logger.debug("catch AuthenticationServiceException from AuthenticationProvide");
         }
+//        domainUser 1, user 2. null
         if (domainUser == null){
-           //todo exception handle
+            throw new UsernameNotFoundException("Username not found in system");
         }
-        //todo find authorities and list authority
         List<Authority> authorities = authorityService.findByUser(domainUser);
         domainUser.setAuthorities(authorities);
         return domainUser;

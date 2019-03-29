@@ -58,21 +58,42 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.GET, params = {"firstName"})
-    public List<User> findByFirstName (@RequestParam("firstName") String firstName){
+    public List<User> findByFirstName (@RequestParam("firstName") String firstName) throws NullPointerException, NotFoundException{
         logger.debug(firstName);
-        return userService.findByFirstName(firstName);
+        List<User> domainUsers = null;
+        try{
+            domainUsers = userService.findByFirstName(firstName);
+            return domainUsers;
+        }catch (Exception repositoryProblem){
+            logger.debug("There is exception here!");
+            return null;
+        }
     }
 
     @RequestMapping(method = RequestMethod.GET, params = {"lastName"})
-        public List<User> findByLastName (@RequestParam("lastName") String lastName){
+        public List<User> findByLastName (@RequestParam("lastName") String lastName) throws NullPointerException, NotFoundException{
         logger.debug(lastName);
-        return userService.findByLastName(lastName);
+        List<User> domainUsers = null;
+        try{
+            domainUsers = userService.findByLastName(lastName);
+            return domainUsers;
+        }catch (Exception repositoryProblem){
+            logger.debug("Got exception");
+            return null;
+        }
     }
 
     @RequestMapping(method = RequestMethod.GET, params = {"email"})
-    public List<User> findByEmail (@RequestParam("email") String email){
-        logger.debug(email);
-        return userService.findByFirstName(email);
+    public User findByEmail (@RequestParam("email") String email) throws NullPointerException, NotFoundException{
+        logger.debug("trying to find user by email" + email);
+        User domainUser = null;
+        try{
+            domainUser = userService.findByEmail(email);
+            return domainUser;
+        }catch(Exception repositoryProblem){
+            logger.debug("catch Exception");
+            return null;
+        }
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -88,16 +109,16 @@ public class UserController {
             final Authentication authentication = authenticationManager.authenticate(notFullyAuthenticated);
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
-//            try {
+            try {
                 final UserDetails userDetails = userService.findByUsername(username);
                 final String token = jwtTokenUtil.generateToken(userDetails);
                 return token;
-//                return ResponseEntity.ok(new JwtAuthenticationResponse(token), HttpStatus.OK);
-//            }
-//            catch (Exc e){
-//                logger.error("System can't find user by email or username",e);
-//                return null;
-//            }
+          //      return ResponseEntity.ok(new JwtAuthenticationResponse(token), HttpStatus.OK);
+            }
+            catch (Exception e){
+                logger.error("System can't find user by email or username",e);
+                return null;
+            }
            }
         catch (AuthenticationException ex){
         logger.error("error message",ex);
