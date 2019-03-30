@@ -29,7 +29,6 @@ public class AuthorityService {
         return authorityRepository.save(authority);
     }
 
-    //todo store createuser, input a user and output an authority method
     @Transactional
     public List<Authority> findByUser(User user) {
         return authorityRepository.findByUser_Id(user.getId());

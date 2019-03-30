@@ -1,14 +1,12 @@
-package com.molly.service;
+package com.molly.extend.security;
 
 import com.molly.domain.Authority;
 import com.molly.domain.User;
-import com.molly.repository.UserRepository;
+import com.molly.service.AuthorityService;
+import com.molly.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -22,7 +20,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 
     @Autowired
-    private  UserService userService;
+    private UserService userService;
 
     @Autowired
     private AuthorityService authorityService;

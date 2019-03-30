@@ -28,7 +28,7 @@ public class JwtTokenUtil { //claim is also payload
     private Long expiration = 86400L;
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    public String generateToken(UserDetails userDetails) {
+    public String generateToken(UserDetails userDetails) { //actual input is user class
         Map<String, Object> claims = new HashMap<>();
         claims.put(CLAIM_KEY_USERNAME, userDetails.getUsername());
         claims.put(CLAIM_KEY_CREATED, new Date());

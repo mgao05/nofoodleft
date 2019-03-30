@@ -36,9 +36,7 @@ public class UserService {
         String encodedPass = encoder.encode(newUser.getPassword());
         newUser.setPassword(encodedPass);
         userRepository.save(newUser);
-
         authorityService.addAuthority("REGISTERED_USER",newUser);
-
         return newUser;
     }
 
@@ -56,9 +54,6 @@ public class UserService {
             throw new UsernameNotFoundException("");}
         return user;
     }
-
-
-
 
     @Transactional(readOnly = true)
     public List<User> findByFirstName(String firstName) throws NotFoundException, NullPointerException{
@@ -96,7 +91,6 @@ public class UserService {
         return user;
     }
 
-    //todo Authority block
 
 
 
