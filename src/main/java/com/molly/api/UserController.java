@@ -1,4 +1,6 @@
 package com.molly.api;
+import com.molly.domain.LoginInfo;
+import com.molly.domain.ResponseToken;
 import com.molly.domain.User;
 import com.molly.extend.security.JwtTokenUtil;
 import com.molly.repository.UserRepository;
@@ -99,20 +101,22 @@ public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public String login(@RequestParam("username") String username, @RequestParam("password") String password){
-        logger.info("username" + username + "password" + password);
+    public ResponseEntity login(@RequestBody LoginInfo requestEntity){
+        logger.info("username" + requestEntity.getUsername() + "is trying to login");
         try {
             Authentication notFullyAuthenticated = new UsernamePasswordAuthenticationToken(
-                    username,
-                    password
+                    requestEntity.getUsername(),
+                    requestEntity.getPassword()
             );
             final Authentication authentication = authenticationManager.authenticate(notFullyAuthenticated);
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
             try {
-                final UserDetails userDetails = userService.findByUsername(username);
+                final UserDetails userDetails = userService.findByUsername(requestEntity.getUsername());
                 final String token = jwtTokenUtil.generateToken(userDetails);
-                return token;
+                ResponseToken responseToken = new ResponseToken(token);
+//                responseToken.setToken(token);
+                return ResponseEntity.ok(responseToken);
           //      return ResponseEntity.ok(new JwtAuthenticationResponse(token), HttpStatus.OK);
             }
             catch (Exception e){

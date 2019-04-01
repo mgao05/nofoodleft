@@ -34,13 +34,13 @@ public class User implements UserDetails {
     private String password;
 
     @Column(name = "account_expired")
-    private boolean accountExpired;
+    private boolean accountExpired=Boolean.FALSE;
     @Column(name = "account_locked")
-    private boolean accountLocked;
+    private boolean accountLocked=Boolean.FALSE;
     @Column(name = "credentials_expired")
-    private boolean credentialsExpired;
+    private boolean credentialsExpired=Boolean.FALSE;
     @Column(name = "enabled")
-    private boolean enabled;
+    private boolean enabled=Boolean.TRUE;
 
 
     @Transient    //database not adding

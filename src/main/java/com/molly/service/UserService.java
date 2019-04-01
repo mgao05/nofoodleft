@@ -21,7 +21,6 @@ public class UserService {
     private UserRepository userRepository;
 
     @Autowired
-    private AuthorityRepository authorityRepository;
     private AuthorityService authorityService;
 
     @Transactional(readOnly = true)

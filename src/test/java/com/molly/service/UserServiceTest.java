@@ -76,5 +76,16 @@ public class UserServiceTest {
        assertNotNull(testUser);
        assertEquals(newUser.getEmail(), testUser.getEmail());
     }
+
+    @Test
+    @Transactional
+    public void createUserTest(){
+        userService.createUser(newUser);
+        userService.save(newUser);
+        User testUser = userService.findById(newUser.getId());
+        assertNotNull(testUser);
+        assertEquals(newUser.getId(), testUser.getId());
+    }
+
 }
 
