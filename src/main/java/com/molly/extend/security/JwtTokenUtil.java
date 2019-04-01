@@ -30,8 +30,13 @@ public class JwtTokenUtil { //claim is also payload
 
     public String generateToken(UserDetails userDetails) { //actual input is user class
         Map<String, Object> claims = new HashMap<>();
+        try{
         claims.put(CLAIM_KEY_USERNAME, userDetails.getUsername());
         claims.put(CLAIM_KEY_CREATED, new Date());
+        } catch (Exception e){
+            claims=null;
+            logger.error("can't generate token");
+        }
         return generateToken(claims);
     }
 
