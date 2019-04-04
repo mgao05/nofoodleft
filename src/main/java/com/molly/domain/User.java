@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import java.util.Collection;
+import java.util.List;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
@@ -46,6 +47,9 @@ public class User implements UserDetails {
     @Transient    //database not adding
     @JsonIgnore   //controller response ignore json
     private Collection<?extends GrantedAuthority> authorities;
+
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "authorities", cascade = CascadeType.ALL)
+//    private List<Authority> authorityList;
 
     //create get and set method for each column, excludes id
     // id

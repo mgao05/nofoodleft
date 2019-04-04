@@ -1,6 +1,8 @@
 package com.molly.service;
 import com.molly.config.AppConfig;
+import com.molly.domain.Authority;
 import com.molly.domain.User;
+import com.molly.repository.AuthorityRepository;
 import com.molly.repository.UserRepository;
 import javassist.NotFoundException;
 import org.junit.Before;
@@ -18,6 +20,7 @@ import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
 @WebAppConfiguration
@@ -28,6 +31,11 @@ public class UserServiceTest {
     @Autowired
     private UserService userService;
     private User newUser;
+    private String originalPass;
+    @Autowired
+    private AuthorityRepository authorityRepository;
+    @Autowired
+    private AuthorityService authorityService;
 
     @Before
     public void setup(){
@@ -36,7 +44,9 @@ public class UserServiceTest {
         newUser.setEmail("gmran@qq.com");
         newUser.setFirstName("Mo");
         newUser.setLastName("lly");
-        newUser.setPassword("password");
+        originalPass= "password";
+        newUser.setPassword(originalPass);
+
     }
     @Test
     @Transactional
@@ -84,7 +94,16 @@ public class UserServiceTest {
         userService.save(newUser);
         User testUser = userService.findById(newUser.getId());
         assertNotNull(testUser);
-        assertEquals(newUser.getId(), testUser.getId());
+        assertNotEquals(originalPass,newUser.getPassword());
+//        authorityRepository.save(newAuthority);
+        List<Authority> testAuthority = authorityRepository.findByUser_Id(newUser.getId());
+        assertTrue(testAuthority.size()>0);
+        for(Authority u: testAuthority){
+            assertEquals(u.getAuthority(),"REGISTERED_USER");
+        }
+        //assertNotEquals(testUser.getPassword(),newUser.getPassword());
+
+//        assertEquals(newUser.getId(), testUser.getId());
     }
 
 }
