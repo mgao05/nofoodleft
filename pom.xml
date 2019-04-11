@@ -8,6 +8,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>nofoodleft</name>
 
+
     <properties>
         <spring.version>5.0.6.RELEASE</spring.version>
         <hibernate.version>5.3.1.Final</hibernate.version>
@@ -15,6 +16,7 @@
         <flyway.version>5.2.4</flyway.version>
         <org.slf4j-version>1.7.25</org.slf4j-version>
         <fasterxml-jackson.version>2.9.8</fasterxml-jackson.version>
+        <aws-sdk.version>1.11.534</aws-sdk.version>
 
 
     </properties>
@@ -23,6 +25,12 @@
 
 
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-s3 -->
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-s3</artifactId>
+            <version>${aws-sdk.version}</version>
+        </dependency>
 
         <!-- io.jsonwebtoken/jjwt -->
         <dependency>
