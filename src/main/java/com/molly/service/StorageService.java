@@ -2,6 +2,7 @@ package com.molly.service;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.S3Object;
+import com.molly.domain.Image;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,7 +14,7 @@ import java.io.IOException;
 public class StorageService {
     private AmazonS3 s3;
     private String bucket;
-
+    private String objectUrl;
     //@Autowired @Qualifier("databaseProperties") PropertiesFactoryBean beanFactory
 
 
@@ -37,13 +38,22 @@ public class StorageService {
         }
     }
 
+    public S3Object getObject(String bucket, String S3key){
+        return s3.getObject(bucket, S3key);}
+
+//    public String getObjectUrl(Image image){
+//        return image.getObjectUrl();
+//    }
+
     public void setBucket(String bucket) {
         this.bucket = bucket;
     }
 
-    public S3Object getObject(String bucket, String S3key){
-        return s3.getObject(bucket, S3key);}
+    public String getObjectUrl() {
+        return objectUrl;
+    }
 
-
-
+    public void setObjectUrl(String objectUrl) {
+        this.objectUrl = objectUrl;
+    }
 }

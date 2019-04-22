@@ -19,6 +19,9 @@ public class Image extends Object {
     @Column(name = "extension")
     private String extension;
 
+    @Column(name = "url")
+    private String url;
+
     @JoinColumn(name = "user_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
@@ -49,12 +52,22 @@ public class Image extends Object {
         return extension;
     }
 
+    public void setExtension(String extension){
+        this.extension = extension;
+    }
+
     //generate s3Key
     public String getFileName(){
         return uuid+extension;
     }
 
 
+    //get url, set url
+    public String getObjectUrl(){
+        return url;
+    }
 
-
+    public void setUrl(String url) {
+        this.url = url;
+    }
 }

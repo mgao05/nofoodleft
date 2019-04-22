@@ -18,7 +18,7 @@
         <fasterxml-jackson.version>2.9.8</fasterxml-jackson.version>
         <aws-sdk.version>1.11.534</aws-sdk.version>
         <mockito.version>2.19.0</mockito.version>
-
+        <apacheversion>2.4</apacheversion>
 
     </properties>
 
@@ -284,6 +284,14 @@
             <version>${spring.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.directory.studio/org.apache.commons.io -->
+        <dependency>
+            <groupId>org.apache.directory.studio</groupId>
+            <artifactId>org.apache.commons.io</artifactId>
+            <version>${apacheversion}</version>
+        </dependency>
+
 
 
     </dependencies>
