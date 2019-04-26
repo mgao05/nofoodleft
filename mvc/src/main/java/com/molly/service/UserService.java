@@ -31,7 +31,7 @@ public class UserService {
         String encodedPass = encoder.encode(newUser.getPassword());
         newUser.setPassword(encodedPass);
         userRepository.save(newUser);
-        authorityService.addAuthority("REGISTERED_USER",newUser);
+        authorityService.addAuthority("ROLE_REGISTERED_USER",newUser);
         return newUser;
     }
 

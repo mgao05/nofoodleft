@@ -7,7 +7,7 @@ import java.util.UUID;
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity
-@Table(name = "image")
+@Table(name = "images")
 public class Image extends Object {
     @Id
     @GeneratedValue(strategy = SEQUENCE, generator = "image_id_seq")
@@ -22,13 +22,13 @@ public class Image extends Object {
     @Column(name = "url")
     private String url;
 
-    @JoinColumn(name = "user_id")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private User user;
-
-    @JoinColumn(name = "food_id")
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Food food;
+//    @JoinColumn(name = "user_id")
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    private User user;
+//
+//    @JoinColumn(name = "food_id")
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    private Food food;
 
     //get id
     public Long getId(){
@@ -41,11 +41,11 @@ public class Image extends Object {
     public void setUuid(String uuid){ this.uuid = uuid; }
 
 
-    //get user_id
-    public Long getUserId(){ return user.getId(); }
-
-    //get food_id
-    public Long getFoodId(){ return food.getId(); }
+//    //get user_id
+//    public Long getUserId(){ return user.getId(); }
+//
+//    //get food_id
+//    public Long getFoodId(){ return food.getId(); }
 
     //get extension
     public String getExtension(){

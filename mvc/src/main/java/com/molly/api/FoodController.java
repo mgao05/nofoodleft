@@ -8,8 +8,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @ResponseBody
@@ -24,24 +27,34 @@ public class FoodController {
     private FoodService foodService;
 
     @RequestMapping(method = RequestMethod.POST)
-    public Food generateFood(@RequestBody Food food){return foodService.save(food);}
+    public Food generateFood(@RequestBody Food food) {
+        return foodService.save(food);
+    }
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<Food> getFoodList(){
+    public List<Food> getFoodList() {
         logger.debug("List food");
         return foodRepository.findAll();
     }
 
     @RequestMapping(method = RequestMethod.GET, params = {"foodType"})
-    public List<Food> findByFoodType(@RequestParam("foodType") String foodType){
+    public List<Food> findByFoodType(@RequestParam("foodType") String foodType) {
         logger.debug(foodType);
         return foodService.findByFoodType(foodType);
     }
 
 
     @RequestMapping(method = RequestMethod.GET, params = {"building_Id"})
-    public List<Food> findByBuildingId(@RequestParam("building_Id") Long id){
-        logger.debug("yy"+id);
+    public List<Food> findByBuildingId(@RequestParam("building_Id") Long id) {
+        logger.debug("yy" + id);
         return foodService.findByBuildingId((id));
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/picture", method = RequestMethod.POST)
+    public Map<String, String> uploadPicture(@RequestParam(value = "pic") MultipartFile picture) {
+        Map<String, String> result = new HashMap<>(1);
+        logger.info(picture.getOriginalFilename());
+        return result;
     }
 }
