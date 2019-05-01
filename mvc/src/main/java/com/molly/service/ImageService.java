@@ -40,17 +40,16 @@ public class ImageService {
             multipartFile.transferTo(localFile);
             storageService.putObject(s3Key,localFile);
             S3Object s3Object = storageService.getObject(s3Key);
-            image.setUrl(storageService.getObjectUrl());
-            //todo not sure why
+            image.setUrl(storageService.getObjectUrl(s3Key));
             image.setExtension(extension);
             return image;
         }catch (IOException e){
             logger.warn("can't find image file");
         }
         return null;
-
-
     }
+
+
 
 
 

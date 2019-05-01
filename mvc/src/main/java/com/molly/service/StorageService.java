@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 
 import java.io.File;
+import java.net.URL;
 
 public class StorageService {
     private AmazonS3 s3;
@@ -39,19 +40,14 @@ public class StorageService {
     public S3Object getObject(String bucket, String S3key){
         return s3.getObject(bucket, S3key);}
 
-//    public String getObjectUrl(Image image){
-//        return image.getObjectUrl();
-//    }
-
     public void setBucket(String bucket) {
         this.bucket = bucket;
     }
 
-    public String getObjectUrl() {
-        return objectUrl;
+    public String getObjectUrl(String S3key) {
+        URL urlObject = s3.getUrl(bucket, S3key);
+        return urlObject.toString();
     }
 
-    public void setObjectUrl(String objectUrl) {
-        this.objectUrl = objectUrl;
-    }
+
 }

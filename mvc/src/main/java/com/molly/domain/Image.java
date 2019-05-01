@@ -22,13 +22,13 @@ public class Image extends Object {
     @Column(name = "url")
     private String url;
 
-//    @JoinColumn(name = "user_id")
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    private User user;
-//
-//    @JoinColumn(name = "food_id")
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    private Food food;
+    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
+
+    @JoinColumn(name = "food_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Food food;
 
     //get id
     public Long getId(){
@@ -63,7 +63,7 @@ public class Image extends Object {
 
 
     //get url, set url
-    public String getObjectUrl(){
+    public String getUrl(){
         return url;
     }
 
