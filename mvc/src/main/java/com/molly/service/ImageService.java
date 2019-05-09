@@ -26,7 +26,7 @@ public class ImageService {
 
 
     @Transactional
-    public Image saveFakeImage(MultipartFile multipartFile, boolean isPublic)throws ServiceException{
+    public Image saveImage(MultipartFile multipartFile, boolean isPublic)throws ServiceException{
         if(multipartFile == null || multipartFile.isEmpty())throw new ServiceException("File must be valid");
 
         String extension = FilenameUtils.getExtension(multipartFile.getOriginalFilename());

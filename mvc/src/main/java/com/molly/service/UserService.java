@@ -32,6 +32,7 @@ public class UserService {
         newUser.setPassword(encodedPass);
         userRepository.save(newUser);
         authorityService.addAuthority("ROLE_REGISTERED_USER",newUser);
+        save(newUser);
         return newUser;
     }
 
