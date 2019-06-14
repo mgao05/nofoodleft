@@ -5,6 +5,7 @@ import com.molly.domain.User;
 import com.molly.extend.security.JwtTokenUtil;
 import com.molly.repository.UserRepository;
 import com.molly.service.UserService;
+import com.molly.service.jms.MessageSQSService;
 import javassist.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +31,9 @@ public class UserController {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
+    private MessageSQSService messageSQSService;
+
+    @Autowired
     private UserRepository userRepository;
 
     @Autowired
@@ -41,6 +45,13 @@ public class UserController {
 
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
+
+
+    @RequestMapping(value = "/sendMessage", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void sendMessage(@RequestParam(value = "user_id") Long userId){
+        messageSQSService.sendMessage(String.valueOf(userId),1);
+    }
 
     @RequestMapping(method = RequestMethod.POST)
     public User generateUser(@RequestBody User user) {

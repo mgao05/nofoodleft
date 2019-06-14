@@ -60,8 +60,13 @@ public class AppConfig {
 
         AmazonSQS sqs = AmazonSQSClientBuilder.standard().withRegion("us-east-1").withCredentials(new DefaultAWSCredentialsProviderChain()).build();
         MessageSQSService messageSQSService = new MessageSQSService(sqs,"https://sqs.us-east-1.amazonaws.com/920616494522/foodDemo");
-
         return messageSQSService;
+    }
+
+    @Bean
+    public AmazonSQS getAmazonSQS(){
+        AmazonSQS client = AmazonSQSClientBuilder.standard().withCredentials(new DefaultAWSCredentialsProviderChain()).build();
+        return client;
     }
 
 }
