@@ -1,8 +1,6 @@
 # **FoodForHunger**
 
 
-## *Ideas and Overview*
-
 ### Why this Project?
 *Everybody loves food, especially when it is free! And nobody likes to see food lying on the table and end up in the trash by end of day... So I want to create something for people to share and get free food!*
 
