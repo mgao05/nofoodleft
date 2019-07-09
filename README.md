@@ -1,14 +1,12 @@
-to add version to pom, go to https://mvnrepository.com/artifact/org.springframework/spring-core/5.1.5.RELEASE
-
 # **FoodForHunger**
 
 
-##*Ideas and Overview*
+## *Ideas and Overview*
 
-###Why this Project?
+### Why this Project?
 *Everybody loves food, especially when it is free! And nobody likes to see food lying on the table and end up in the trash by end of day... So I want to create something for people to share and get free food!*
 
-###What is used to create the project?
+### What is used to create the project?
 *This is a Java8 backend project developed in Sping Framework. Things used are: Spring Boot, Spring Data, Hibernate, Spring RESTful web services, Postman, Maven, PostgresSQL, Docker, Amazon SQS and Amazon S3.*
 
 *Business Roles Sort of:
