@@ -9,7 +9,7 @@
 ### What is used to create the project?
 *This is a Java8 backend project developed in Sping Framework. Things used are: Spring Boot, Spring Data, Hibernate, Spring RESTful web services, Postman, Maven, PostgresSQL, Docker, Amazon SQS and Amazon S3.*
 
-*Business Roles Sort of:
+*Business Roles:*
 
 1. Object: User, Food, Image, Building, Area
 
@@ -20,7 +20,7 @@
 	2.4 Food record is mapped to one building and its area.
 	2.5 One user can choose to not subscribe or subscribe to any buildings/areas as desired. 
 
-*Project Approach:
+*Project Approach:*
 
 1. Created User, Building, Food, Image Domain
 2. Used Hibernate to do the database schema migration
